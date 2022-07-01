@@ -95,6 +95,14 @@ const lisenInputsearchValue = () => {
   });
 };
 
+const lisenInputIngredientsValue = () => {
+  const $input = document.querySelector("#ingredients");
+  console.log($input);
+  $input.addEventListener("keyup", (event) => {
+    console.log(event.target.value);
+  });
+};
+
 const searchRecipes = (value) => {
   const filterValues = getFiltersValues();
 
@@ -149,6 +157,7 @@ async function init() {
   await creatDropdown(DATA);
   await addFilter();
   await lisenInputsearchValue();
+  await lisenInputIngredientsValue();
 }
 
 window.addEventListener("load", () => {

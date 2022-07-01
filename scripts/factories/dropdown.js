@@ -1,5 +1,6 @@
 function dropdownFactory(data) {
   [ingredients, appareils, ustensiles] = data;
+
   const createDropdownIngredients = () => {
     const $wrapper = document.querySelector("#dropdownIngredients ul");
     removeChild($wrapper);
@@ -42,5 +43,10 @@ function dropdownFactory(data) {
     createDropdownAppareils();
     createDropdownUstensiles();
   };
-  return { createDropdown };
+  return {
+    createDropdown,
+    createDropdownIngredients,
+    createDropdownAppareils,
+    createDropdownUstensiles,
+  };
 }
