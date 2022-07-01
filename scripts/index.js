@@ -11,11 +11,11 @@ const makeAllRecipes = (recipes) => {
         $wrapper.appendChild(cardRecipe);
         const cardIngredients = factoryRecipes.makeCardIngredients();
       })
-    : ($wrapper.innerText = "aucune recette disponible");
+    : ($wrapper.innerText =
+        "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.");
 };
 
 const creatDropdown = (recipes) => {
-  console.log("dropdown");
   const ingredients = [];
   const appareils = [];
   const ustensiles = [];
