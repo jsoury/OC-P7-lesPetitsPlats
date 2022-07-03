@@ -15,6 +15,7 @@ function filterFactory(data) {
 
     const $badge = document.createElement("div");
     $badge.classList = `badge bg-${selectType(type)}`;
+    $badge.dataset.type = type;
     $badge.innerHTML = `${value} <i class="far fa-times-circle" aria-hidden="true" onclick="removeBadge(event)"></i>`;
     $wrapper.appendChild($badge);
   };

@@ -91,38 +91,59 @@
   display: flex;
 }
 
-.dropdown.open {
-  width: 667px;
-}
-
-.dropdown.open input {
-  width: 100%;
-}
-
 .dropdown ul {
-  width: 100%;
-  color: white;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.dropdown input::placeholder {
+.dropdown .form-control {
+  background-color: inherit;
+  border: none;
   color: white;
 }
-.dropdown input {
+.dropdown .form-control:focus {
+  color: white;
+  background-color: inherit;
+  border: none;
+  box-shadow: none;
+}
+.dropdown .form-control::after {
+  font-family: "FontAwesome";
+  content: "\f077";
+  position: absolute;
+  right: 8px;
+  top: 16.5px;
+  font-size: 18px;
+  color: white;
+  font-weight: 400;
+}
+.dropdown input::placeholder {
+  color: gray;
+}
+.dropdown .btn {
   height: 69px;
+}
+.dropdown .btn.show {
+  display: none;
 }
 .dropdown-menu {
   --bs-dropdown-color: #fff !important;
-
   border: none;
 }
-.dropdown-menu[aria-labelledby="ingredients"] {
+.dropdown-menu[aria-labelledby="dropdownMenuButtonIngredients"] {
   --bs-dropdown-bg: #0d6efd !important;
 }
-.dropdown-menu[aria-labelledby="appareils"] {
+.dropdown-menu[aria-labelledby="dropdownMenuButtonAppareils"] {
   --bs-dropdown-bg: #198754 !important;
 }
-.dropdown-menu[aria-labelledby="ustensiles"] {
+.dropdown-menu[aria-labelledby="dropdownMenuButtonUstensiles"] {
   --bs-dropdown-bg: #dc3545 !important;
+}
+
+.dropdown-menu.show {
+  position: relative !important;
+  transform: none !important;
 }
 .dropdown-menu a {
   color: white;
@@ -131,7 +152,8 @@
   color: black !important;
   background-color: transparent !important;
 }
-.dropdown-menu.show {
+
+.dropdown-result {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr);
 }

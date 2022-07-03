@@ -59,46 +59,87 @@
       <!--DROPDOWN-->
       <div class="dropdown-list">
         <div class="dropdown" id="dropdownIngredients">
-          <input
+          <button
             class="btn btn-primary dropdown-toggle"
-            type="text"
-            id="ingredients"
+            type="button"
+            id="dropdownMenuButtonIngredients"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            placeholder="Ingredients"
-          />
-          <ul
+          >
+            Ingredients
+          </button>
+
+          <div
             class="dropdown-menu dropdown-menu-primary"
-            aria-labelledby="ingredients"
-          ></ul>
+            aria-labelledby="dropdownMenuButtonIngredients"
+          >
+            <input
+              class="form-control"
+              type="text"
+              id="ingredients"
+              placeholder="Rechercher un ingédient"
+            />
+            <ul
+              class="dropdown-result dropdown-menu-primary"
+              aria-labelledby="ingredients"
+            ></ul>
+          </div>
         </div>
+
         <div class="dropdown" id="dropdownAppareils">
-          <input
+          <button
             class="btn btn-success dropdown-toggle"
-            type="text"
-            id="appareils"
+            type="button"
+            id="dropdownMenuButtonAppareils"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            placeholder="Appareils"
-          />
-          <ul
-            class="dropdown-menu dropdown-menu-primary"
-            aria-labelledby="appareils"
-          ></ul>
+          >
+            Appareils
+          </button>
+
+          <div
+            class="dropdown-menu dropdown-menu-success"
+            aria-labelledby="dropdownMenuButtonAppareils"
+          >
+            <input
+              class="form-control"
+              type="text"
+              id="appareils"
+              placeholder="Rechercher un appareil"
+            />
+            <ul
+              class="dropdown-result dropdown-menu-success"
+              aria-labelledby="ingredients"
+            ></ul>
+          </div>
         </div>
+
         <div class="dropdown" id="dropdownUstensiles">
-          <input
+          <button
             class="btn btn-danger dropdown-toggle"
-            type="text"
-            id="ustensiles"
+            type="button"
+            id="dropdownMenuButtonUstensiles"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            placeholder="Ustensiles"
-          />
-          <ul
-            class="dropdown-menu dropdown-menu-primary"
-            aria-labelledby="ustensiles"
-          ></ul>
+          >
+            Ustensiles
+          </button>
+
+          <div
+            class="dropdown-menu dropdown-menu-danger"
+            aria-labelledby="dropdownMenuButtonUstensiles"
+          >
+            <input
+              class="form-control"
+              type="text"
+              id="ustensiles"
+              placeholder="Rechercher un ustensiles"
+            />
+            <ul
+              class="dropdown-result dropdown-menu-danger"
+              aria-labelledby="ustensiles"
+            ></ul>
+          </div>
         </div>
       </div>
 
@@ -128,7 +169,6 @@
 
     <!--Utils-->
     <script src="./scripts/utils/sorting.js"></script>
-    <script src="./scripts/utils/dropdown.js"></script>
     <script src="./scripts/utils/remove-child.js"></script>
 
     <!--Page-->

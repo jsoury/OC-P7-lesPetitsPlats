@@ -1,94 +1,71 @@
-const arrayToSort = ["za", "zb", "x", "c", "a", "ä"];
-const arrayLength = arrayToSort.length;
+const dataFilter = (valueSearch, data) => {
+  valueSearch = valueSearch.toLowerCase();
+  const result = [];
+  for (let i = 0; i < data.length; i++) {
+    const nameRecipe = data[i].name.toLowerCase();
+    const indexRecipe = nameRecipe.indexOf(valueSearch);
 
-//tri à bulles(bubble sort) simple et lent
-const bubbleSort = (array) => {
-  let isSwapped;
-  do {
-    isSwapped = false;
-    const arrayLength = array.length;
-    for (let i = 0; i < arrayLength - 1; i++) {
-      if (array[i].localeCompare(array[i + 1]) === 1) {
-        const tempLeftValue = array[i];
-        array[i] = array[i + 1];
-        array[i + 1] = tempLeftValue;
-        isSwapped = true;
-      }
-    }
-  } while (isSwapped);
-  return array;
-};
-//console.log(bubbleSort(arrayToSort));
+    const description = data[i].description.toLowerCase();
+    const indexDescription = description.indexOf(valueSearch);
 
-//tri par insertion simple et lent avec beaucoup de données
-const insertionSort = (array) => {
-  for (let i = 1; i < arrayLength; i++) {
-    const currentItem = array[i];
-    let currentLeftIndex = i - 1;
-    while (
-      currentLeftIndex >= 0 &&
-      array[currentLeftIndex].localeCompare(currentItem, "fr", {
-        sensitivity: "base",
-      }) === 1
-    ) {
-      array[currentLeftIndex + 1] = array[currentLeftIndex];
-      currentLeftIndex--;
+    if (indexRecipe !== -1) result.push(data[i]);
+    else if (indexDescription !== -1) result.push(data[i]);
+
+    for (let y = 0; y < data[i].ingredients.length; y++) {
+      const nameIngredient = data[i].ingredients[y].ingredient.toLowerCase();
+      let indexIngredient = nameIngredient.indexOf(valueSearch);
+
+      if (indexIngredient !== -1) result.push(data[i]);
     }
-    array[currentLeftIndex + 1] = currentItem;
   }
-  return array;
+  return [...new Set(result)];
 };
-//insertionSort(arrayToSort);
 
 // const dataFilter = (valueSearch, data) => {
 //   valueSearch = valueSearch.toLowerCase();
-//   const result = [];
-//   for (let i = 0; i < data.length; i++) {
-//     const nameRecipe = data[i].name.toLowerCase();
-//     let indexRecipe = nameRecipe.indexOf(valueSearch);
-//     if (indexRecipe !== -1) result.push(data[i]);
+//   let recipes = data.filter(({ name }) =>
+//     name.toLowerCase().includes(valueSearch)
+//   );
 
-//     const indexAppliance = data[i].appliance.toLowerCase().indexOf(valueSearch);
-//     if (indexAppliance !== -1) result.push(data[i]);
+//   let recipesByIngredient = data.filter(({ ingredients }) => {
+//     let ingredientInRecipe = ingredients.filter(({ ingredient }) =>
+//       ingredient.toLowerCase().includes(valueSearch)
+//     );
+//     if (ingredientInRecipe.length > 0) return data;
+//   });
 
-//     for (let y = 0; y < data[i].ingredients.length; y++) {
-//       const nameIngredient = data[i].ingredients[y].ingredient.toLowerCase();
-//       let indexIngredient = nameIngredient.indexOf(valueSearch);
-
-//       if (indexIngredient !== -1) result.push(data[i]);
-//     }
-
-//     for (let x = 0; x < data[i].ustensils.length; x++) {
-//       const nameUstensil = data[i].ustensils[x].toLowerCase();
-//       let indexUstensil = nameUstensil.indexOf(valueSearch);
-
-//       if (indexUstensil !== -1) result.push(data[i]);
-//     }
-//   }
-//   console.log([...new Set(result)]);
+//   let description = data.filter(({ description }) => {
+//     let wordInDescription = description
+//       .split(" ")
+//       .filter((word) => word.toLowerCase().includes(valueSearch));
+//     console.log(wordInDescription);
+//     if (wordInDescription.length > 0) return data;
+//   });
+//   const result = recipes.concat(recipesByIngredient).concat(description);
 //   return [...new Set(result)];
 // };
 
-const dataFilter = (valueSearch, data) => {
-  valueSearch = valueSearch.toLowerCase();
-  let recipes = data.filter(({ name }) =>
-    name.toLowerCase().includes(valueSearch)
-  );
-
-  let recipesByIngredient = data.filter(({ ingredients }) => {
-    let ingredientInRecipe = ingredients.filter(({ ingredient }) =>
-      ingredient.toLowerCase().includes(valueSearch)
+const dataFilterByTag = (tag, data) => {
+  let result = [];
+  if (tag.type === "ingredient") {
+    let recipesByIngredient = data.filter(({ ingredients }) =>
+      ingredients.some(({ ingredient }) => ingredient === tag.value)
     );
-    if (ingredientInRecipe.length > 0) return data;
-  });
+    result = result.concat(recipesByIngredient);
+  } else if (tag.type === "appareil") {
+    let recipesByAppareil = data.filter(
+      ({ appliance }) => appliance.toLowerCase() === tag.value.toLowerCase()
+    );
+    result = result.concat(recipesByAppareil);
+  } else if (tag.type === "ustensile") {
+    let recipesByUstensile = data.filter(({ ustensils }) =>
+      ustensils.some(
+        (ustensil) => ustensil.toLowerCase() === tag.value.toLowerCase()
+      )
+    );
 
-  let description = data.filter(({ description }) => {
-    let wordInDescription = description
-      .split(" ")
-      .filter((word) => word.toLowerCase().includes(valueSearch));
-    console.log(wordInDescription);
-    if (wordInDescription.length > 0) return data;
-  });
-  const result = recipes.concat(recipesByIngredient).concat(description);
-  return [...new Set(result)];
+    result = result.concat(recipesByUstensile);
+  }
+
+  return result;
 };

@@ -35,17 +35,7 @@ const creatDropdown = (recipes) => {
 
   const data = [IngredientsUnique, appareilsUnique, ustensileUnique];
   const factoryDropdown = dropdownFactory(data);
-  const dropDownElement = factoryDropdown.createDropdown();
-};
-
-const creatBadge = (data) => {
-  const factoryFilter = filterFactory(data);
-  factoryFilter.createFilter();
-};
-
-const removeBadge = (event) => {
-  event.currentTarget.parentNode.remove();
-  searchRecipes($INPUT.value);
+  factoryDropdown.createDropdown();
 };
 
 const addFilterIngredients = () => {
@@ -56,6 +46,7 @@ const addFilterIngredients = () => {
     ingredient.addEventListener("click", (event) => {
       creatBadge({ value: event.currentTarget.innerText, type: "ingredient" });
       searchRecipes($INPUT.value);
+      emptyInputDropdown("ingredients");
     });
   });
 };
@@ -64,7 +55,8 @@ const addFilterAppareils = () => {
   $appareils.forEach((appareil) => {
     appareil.addEventListener("click", (event) => {
       creatBadge({ value: event.currentTarget.innerText, type: "appareil" });
-      searchRecipes();
+      searchRecipes($INPUT.value);
+      emptyInputDropdown("appareils");
     });
   });
 };
@@ -73,7 +65,8 @@ const addFilterUstensiles = () => {
   $ustensiles.forEach((ustensile) => {
     ustensile.addEventListener("click", (event) => {
       creatBadge({ value: event.currentTarget.innerText, type: "ustensile" });
-      searchRecipes();
+      searchRecipes($INPUT.value);
+      emptyInputDropdown("ustensiles");
     });
   });
 };
@@ -82,6 +75,16 @@ const addFilter = () => {
   addFilterIngredients();
   addFilterAppareils();
   addFilterUstensiles();
+};
+
+const creatBadge = (data) => {
+  const factoryFilter = filterFactory(data);
+  factoryFilter.createFilter();
+};
+
+const removeBadge = (event) => {
+  event.currentTarget.parentNode.remove();
+  searchRecipes($INPUT.value);
 };
 
 const lisenInputsearchValue = () => {
@@ -95,14 +98,6 @@ const lisenInputsearchValue = () => {
   });
 };
 
-const lisenInputIngredientsValue = () => {
-  const $input = document.querySelector("#ingredients");
-  console.log($input);
-  $input.addEventListener("keyup", (event) => {
-    console.log(event.target.value);
-  });
-};
-
 const searchRecipes = (value) => {
   const filterValues = getFiltersValues();
 
@@ -111,20 +106,74 @@ const searchRecipes = (value) => {
     DATA = dataFilter(value, DATA);
     refreshDisplay(DATA);
   } else if (value && filterValues.length != 0) {
+    DATA = recipes;
     DATA = dataFilter(value, DATA);
-    filterValues.forEach((filter) => {
-      DATA = searchRecipesByFilter(filter);
+    filterValues.forEach((tag) => {
+      DATA = dataFilterByTag(tag, DATA);
     });
     refreshDisplay(DATA);
   } else if (!value && filterValues.length != 0) {
     DATA = recipes;
-    filterValues.forEach((filter) => {
-      DATA = searchRecipesByFilter(filter);
+    filterValues.forEach((tag) => {
+      DATA = dataFilterByTag(tag, DATA);
     });
     refreshDisplay(DATA);
   } else {
     DATA = recipes;
     refreshDisplay(DATA);
+  }
+};
+
+const lisenInputIngredientsValue = () => {
+  const $ListInput = document.querySelectorAll(".dropdown-list input");
+  $ListInput.forEach((input) => {
+    input.addEventListener("keyup", (event) => {
+      console.log(event.target.id, event.target.value);
+      filterDropdownlist(event.target.id, event.target.value);
+    });
+  });
+};
+
+const filterDropdownlist = (dropdownId, value) => {
+  let dataDropdown = [];
+  DATA.forEach((recipes) => {
+    if (dropdownId === "ingredients") {
+      recipes.ingredients.forEach((ingredient) => {
+        if (ingredient.ingredient.toLowerCase().includes(value.toLowerCase()))
+          dataDropdown.push(capitalize(ingredient.ingredient));
+      });
+      dataDropdown = [...new Set(dataDropdown)];
+    }
+    if (dropdownId === "appareils") {
+      if (recipes.appliance.toLowerCase().includes(value.toLowerCase()))
+        dataDropdown.push(capitalize(recipes.appliance));
+      dataDropdown = [...new Set(dataDropdown)];
+    }
+    if (dropdownId === "ustensiles") {
+      recipes.ustensils.forEach((ustensil) => {
+        if (ustensil.toLowerCase().includes(value.toLowerCase()))
+          dataDropdown.push(capitalize(ustensil));
+      });
+      dataDropdown = [...new Set(dataDropdown)];
+    }
+  });
+  if (dropdownId === "ingredients") {
+    const data = [dataDropdown, [], []];
+    const factoryDropdown = dropdownFactory(data);
+    factoryDropdown.createDropdownIngredients();
+    addFilterIngredients();
+  }
+  if (dropdownId === "appareils") {
+    const data = [[], dataDropdown, []];
+    const factoryDropdown = dropdownFactory(data);
+    factoryDropdown.createDropdownAppareils();
+    addFilterAppareils();
+  }
+  if (dropdownId === "ustensiles") {
+    const data = [[], [], dataDropdown];
+    const factoryDropdown = dropdownFactory(data);
+    factoryDropdown.createDropdownUstensiles();
+    addFilterUstensiles();
   }
 };
 
@@ -134,23 +183,25 @@ const refreshDisplay = (data) => {
     : makeAllRecipes();
 };
 
-const searchRecipesByFilter = (value) => {
-  DATA = dataFilter(value, DATA);
-  return DATA;
-};
-
 const getFiltersValues = () => {
   let filterValues = [];
   const $filters = document.querySelector(".filter");
   for (element of $filters.children)
-    filterValues.push(element.innerText.trim());
+    filterValues.push({
+      type: element.dataset.type,
+      value: element.innerText.trim(),
+    });
 
   return filterValues;
 };
 
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}
+const capitalize = (str) =>
+  str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+const emptyInputDropdown = (inputId) => {
+  const $input = document.querySelector(`#${inputId}`);
+  $input.value = "";
+};
 
 async function init() {
   await makeAllRecipes(DATA);
