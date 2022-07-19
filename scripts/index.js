@@ -128,7 +128,6 @@ const lisenInputIngredientsValue = () => {
   const $ListInput = document.querySelectorAll(".dropdown-list input");
   $ListInput.forEach((input) => {
     input.addEventListener("keyup", (event) => {
-      console.log(event.target.id, event.target.value);
       filterDropdownlist(event.target.id, event.target.value);
     });
   });

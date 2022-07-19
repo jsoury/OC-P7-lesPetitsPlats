@@ -25,6 +25,7 @@
 //search with array object
 const dataFilter = (valueSearch, data) => {
   valueSearch = valueSearch.toLowerCase();
+
   let recipes = data.filter(({ name }) =>
     name.toLowerCase().includes(valueSearch)
   );
@@ -40,7 +41,6 @@ const dataFilter = (valueSearch, data) => {
     let wordInDescription = description
       .split(" ")
       .filter((word) => word.toLowerCase().includes(valueSearch));
-    console.log(wordInDescription);
     if (wordInDescription.length > 0) return data;
   });
   const result = recipes.concat(recipesByIngredient).concat(description);
