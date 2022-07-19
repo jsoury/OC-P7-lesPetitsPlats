@@ -1,4 +1,4 @@
-//search with native curls
+// search with native curls
 // const dataFilter = (valueSearch, data) => {
 //   valueSearch = valueSearch.toLowerCase();
 //   const result = [];

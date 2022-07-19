@@ -9,7 +9,7 @@ const makeAllRecipes = (recipes) => {
         const factoryRecipes = recipesFactory(recipe);
         const cardRecipe = factoryRecipes.createRecipeCard();
         $wrapper.appendChild(cardRecipe);
-        const cardIngredients = factoryRecipes.makeCardIngredients();
+        factoryRecipes.makeCardIngredients();
       })
     : ($wrapper.innerText =
         "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.");
