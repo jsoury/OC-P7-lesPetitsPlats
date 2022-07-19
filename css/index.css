@@ -66,8 +66,10 @@
   padding: 0;
   text-overflow: ellipsis;
   overflow: hidden;
-  word-wrap: break-word;
-  white-space: nowrap;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
 }
 
 .card.recipe ul {
