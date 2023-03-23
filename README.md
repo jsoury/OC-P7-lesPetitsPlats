@@ -8,7 +8,6 @@ Création de deux algorithmes de recherche pour obtenir la version la plus optim
 - une version en programmation fonctionnelle avec les méthodes de l'objet array (foreach, filter, map, reduce)
 
 * voir le [projet](https://jsoury.github.io/OC-P7-lesPetitsPlats/).
-*
 
 ## 1. Contexte
 
@@ -19,27 +18,27 @@ aucun prérequis JS vanilla
 
 ## 2. Objectifs
 
-- Implémenter l'interface en fonction du la [maquette Figma](https://www.figma.com/file/xqeE1ZKlHUWi2Efo8r73NK/UI-Design-Les-Petits-Plats-FR)
-- Planifie les 2 versions de l'algorithme de recherche [Fiche d'investigation](https://github.com/jsoury/OC-P7-lesPetitsPlats/blob/main/Fiche%2Bd%E2%80%99investigation%2Bfonctionnalite%CC%81.pdf)
+- Implémenter l'interface en fonction de la [maquette Figma](https://www.figma.com/file/xqeE1ZKlHUWi2Efo8r73NK/UI-Design-Les-Petits-Plats-FR)
+- Planifie les 2 versions de l'algorithme de recherche. [Fiche d'investigation](https://github.com/jsoury/OC-P7-lesPetitsPlats/blob/main/Fiche%2Bd%E2%80%99investigation%2Bfonctionnalite%CC%81.pdf)
 
 ## 3. Spécifications
 
 - HTML, CSS
 - JavaScript
 
-## 3. Démarrage
+## 4. Démarrage
 
 [Code source](https://github.com/jsoury/OC-P7-lesPetitsPlats)
 
-### 3.1. IDE
+### 4.1. IDE
 
 - [Visual Studio code](https://code.visualstudio.com/)
 
-### 3.2. Prérequis
+### 4.2. Prérequis
 
-[Liver server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- [Liver server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 
-### 3.3 Utilisation
+### 4.3 Utilisation
 
 - Clonez ce dépôt sur votre ordinateur:
 
@@ -49,7 +48,7 @@ git clone https://github.com/jsoury/OC-P7-lesPetitsPlats.git
 
 - Exécuter index.html
 
-## 4. Auteur
+## 5. Auteur
 
 - [![](https://img.shields.io/badge/Portfolio-Jonathan%20SOURY-orange)](https://js-portfolio-hgzextusx-jsoury.vercel.app/)
 - [![](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/jonathan-soury/)
