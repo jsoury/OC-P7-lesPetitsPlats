@@ -20,7 +20,7 @@ aucun prérequis JS vanilla
 ## 2. Objectifs
 
 - Implémenter l'interface en fonction du la [maquette Figma](https://www.figma.com/file/xqeE1ZKlHUWi2Efo8r73NK/UI-Design-Les-Petits-Plats-FR)
-- Planifie les 2 versions de l'algorithme de recherche [Fiche d'investigation]()
+- Planifie les 2 versions de l'algorithme de recherche [Fiche d'investigation](https://github.com/jsoury/OC-P7-lesPetitsPlats/blob/main/Fiche%2Bd%E2%80%99investigation%2Bfonctionnalite%CC%81.pdf)
 
 ## 3. Spécifications
 
